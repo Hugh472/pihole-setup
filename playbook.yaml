@@ -75,9 +75,6 @@
         update_cache: yes
       become: true
 
-    - name: Start Tailscale
-      shell: tailscale up --ssh
-
     - name: Next Steps
       ansible.builtin.debug:
-        msg: "restart your machine, make sure it's on the tailnet, and then docker-compose up"
+        msg: "restart your machine, run tailscale up --ssh, and then docker-compose up"
