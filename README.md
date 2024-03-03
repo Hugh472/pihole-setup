@@ -3,7 +3,9 @@
 ## Step One
 
 Make a github PAT for the box an get it into .bashrc as GITHUB_TOKEN
-Get a TailScale auth key and do the same thing with .bashrc
+And:
+git config --global <username>
+git config --email <email>
 
 ## Step Two
 
