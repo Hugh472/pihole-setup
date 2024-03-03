@@ -1,7 +1,6 @@
 - name: PiHole Setup
   hosts: localhost
   connection: local
-  become: true
   tasks:
     - name: Install prerequisite packages
       ansible.builtin.apt:
@@ -12,6 +11,7 @@
           - python3-pip
           - apt-transport-https
         update_cache: yes
+      become: true
 
     - name: Remove packages
       ansible.builtin.apt:
@@ -24,6 +24,7 @@
           - containerd
           - runc
         state: absent
+      become: true
 
     - name: Add keyring
       shell: |
@@ -47,17 +48,20 @@
           - docker-buildx-plugin
           - docker-compose-plugin
         update_cache: yes
+      become: true
 
     - name: create docker group
       ansible.builtin.group:
         name: docker
         gid: 1750
         state: present
+      become: true
 
     - name: make pi user execute docker commands
       ansible.builtin.user:
         name: docker
         group: docker
+      become: true
 
     - name: add Tailscale to repos
       shell: |
@@ -68,11 +72,11 @@
       ansible.legacy.apt:
         name: tailscale
         state: present
+      become: true
 
     - name: Start Tailscale
       shell: tailscale up --ssh
 
     - name: Next Steps
       ansible.builtin.debug:
-          msg:
-          - "restart your machine, make sure it's on the tailnet, and then docker-compose up""
+        msg: "restart your machine, make sure it's on the tailnet, and then docker-compose up"
