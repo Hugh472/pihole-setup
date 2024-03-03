@@ -88,6 +88,7 @@
 
         # Allow established sessions to receive traffic
         iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+      become: true
 
     - name: Next Steps
       ansible.builtin.debug:
