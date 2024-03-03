@@ -72,6 +72,7 @@
       ansible.legacy.apt:
         name: tailscale
         state: present
+        update_cache: yes
       become: true
 
     - name: Start Tailscale
