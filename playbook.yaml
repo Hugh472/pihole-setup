@@ -59,7 +59,7 @@
 
     - name: make pi user execute docker commands
       ansible.builtin.user:
-        name: docker
+        name: "{{ lookup('env', 'USER') }}"
         group: docker
       become: true
 
