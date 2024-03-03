@@ -75,6 +75,20 @@
         update_cache: yes
       become: true
 
+    - name: IPTables rules
+      shell: |
+        # Set default chain policies
+        iptables -P INPUT DROP
+        iptables -P FORWARD DROP
+        iptables -P OUTPUT ACCEPT
+
+        # Accept on localhost
+        iptables -A INPUT -i lo -j ACCEPT
+        iptables -A OUTPUT -o lo -j ACCEPT
+
+        # Allow established sessions to receive traffic
+        iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
     - name: Next Steps
       ansible.builtin.debug:
         msg: "restart your machine, run tailscale up --ssh, and then docker-compose up"
