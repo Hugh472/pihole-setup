@@ -17,7 +17,8 @@ reboot
 
 ## Step Four
 
-tailscale up --ssh
+tailscale up --ssh --accept-dns=false
+
 get rid of key expiry in the management console if you want to
 
 ## Step Five
