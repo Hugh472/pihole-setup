@@ -88,6 +88,9 @@
 
         # Allow established sessions to receive traffic
         iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+        # Allow for SSH traffic as a backup
+        iptables -I INPUT -p tcp --dport 22 -j ACCEPT
       become: true
 
     - name: Next Steps
